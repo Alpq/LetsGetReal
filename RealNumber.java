@@ -1,14 +1,13 @@
+// Special Thanks to Reng Zheng for helping with Test Cases!
 public class RealNumber{
   private double value;
 
   public RealNumber(double v){
     value = v;
   }
-
   public double getValue(){
     return value;
   }
-
   public String toString(){
     return ""+getValue();
   }
@@ -23,9 +22,9 @@ public class RealNumber{
     {
       return this.value == 0;
     }
-    double thi = this.value + 100000;
-    other.value = other.value * 100000;
-    return Math.round(thi) == Math.round(other.value);
+    double thi = this.value * 1000000;
+    double oth = other.value * 1000000;
+    return Math.round(thi) == Math.round(oth);
   }
 
   /*
