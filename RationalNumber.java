@@ -8,7 +8,7 @@ public class RationalNumber extends Number {
   *@param deno the denominator
   */
   public RationalNumber(int nume, int deno){
-    super(0.0);//this value is ignored!
+
     if (deno == 0)
     {
       denominator = 1;
@@ -17,6 +17,8 @@ public class RationalNumber extends Number {
       denominator = deno;
       numerator = nume;
     }
+    if (this.numerator != 0 && this.denominator != 0)
+    {this.reduce();}
   }
 
   public double getValue(){
@@ -46,7 +48,8 @@ public class RationalNumber extends Number {
   *@return the value expressed as "3/4" or "8/3"
   */
   public String toString(){
-    if (this.denominator = 0) {return Integer.toString(this.numerator);}
+    if (this.numerator == 0) {return "0";}
+    if (this.denominator == 1) {return Integer.toString(this.numerator);}
     return Integer.toString(this.numerator) + "/" + Integer.toString(this.denominator);
   }
 
@@ -57,7 +60,7 @@ public class RationalNumber extends Number {
   */
   private static int gcd(int a, int b){
     /*use euclids method or a better one*/
-    int thing = 1;
+    int thing = 2;
     for (int i = 1; i <= Math.min(a, b); i ++ ) {
       if(a % i == 0 && b % i == 0)
       {
