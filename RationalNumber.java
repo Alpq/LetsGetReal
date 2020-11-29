@@ -1,5 +1,5 @@
 
-public class RationalNumber extends RealNumber {
+public class RationalNumber extends Number {
   private int numerator, denominator;
 
   /**Initialize the RationalNumber with the provided values
@@ -13,13 +13,14 @@ public class RationalNumber extends RealNumber {
     {
       denominator = 1;
       numerator = 0;
+    }else{
+      denominator = deno;
+      numerator = nume;
     }
-    denominator = deno;
-    numerator = nume;
   }
 
   public double getValue(){
-    return (double)this.numerator / (double)this.denominator;
+    return ((double)this.numerator) / this.denominator;
   }
   /**
   *@return the numerator
@@ -40,17 +41,12 @@ public class RationalNumber extends RealNumber {
   public RationalNumber reciprocal(){
     return new RationalNumber(this.denominator, this.numerator);
   }
-  /**
-  *@return true when the RationalNumbers have the same numerators and denominators, false otherwise.
-  */
-  public boolean equals(RationalNumber other){
-    return this.numerator == other.numerator && this.denominator == other.denominator;
-  }
 
   /**
   *@return the value expressed as "3/4" or "8/3"
   */
   public String toString(){
+    if (this.denominator = 0) {return Integer.toString(this.numerator);}
     return Integer.toString(this.numerator) + "/" + Integer.toString(this.denominator);
   }
 
@@ -61,11 +57,14 @@ public class RationalNumber extends RealNumber {
   */
   private static int gcd(int a, int b){
     /*use euclids method or a better one*/
-    if (a == 0)
-    {
-      return b;
+    int thing = 1;
+    for (int i = 1; i <= Math.min(a, b); i ++ ) {
+      if(a % i == 0 && b % i == 0)
+      {
+        thing = i;
+      }
     }
-    return gcd(b%a, a);
+    return thing;
   }
 
   /**
@@ -78,6 +77,20 @@ public class RationalNumber extends RealNumber {
     this.numerator = this.numerator / thing;
     this.denominator = this.denominator / thing;
   }
+  /**
+  *@return true when the RationalNumbers have the same numerators and denominators, false otherwise.
+  */
+  public boolean equals(RationalNumber other){
+    if (this.numerator == 0 && other.numerator == 0)
+    {
+      return true;
+    }
+    this.reduce();
+    other.reduce();
+    return this.numerator == other.numerator && this.denominator == other.denominator;
+
+  }
+
   /******************Operations Return a new RationalNumber!!!!****************/
   /**
   *Return a new RationalNumber that is the product of this and the other
